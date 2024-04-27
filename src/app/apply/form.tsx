@@ -59,14 +59,14 @@ const formSchema = z.object({
   department: z.string().min(2, {
     message: "Department must be at least 2 characters.",
   }),
-  level: z.number().min(100).max(800),
+  level: z.string(),
   title: z.string().min(2, {
     message: "Title must be at least 2 characters.",
   }),
   summary: z.string().min(2, {
     message: "Summary must be at least 2 characters.",
   }),
-  comments: z.string(),
+  comments: z.string().min(0),
 });
 
 export function ApplicationForm() {
@@ -81,6 +81,14 @@ export function ApplicationForm() {
       country: "",
       street: "",
       bio: "",
+      school: "",
+      state: "",
+      city: "",
+      department: "",
+      level: "100",
+      title: "",
+      summary: "",
+      comments: "",
     },
   });
 
@@ -167,47 +175,39 @@ export function ApplicationForm() {
                 </div>
 
                 <div className="sm:col-span-4">
-                  <label
-                    htmlFor="country"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Country
-                  </label>
-                  <div className="mt-2">
-                    <FormField
-                      control={form.control}
-                      name="country"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <FormControl>
-                              <SelectTrigger className="w-[280px]">
-                                <SelectValue placeholder="Select a country" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectGroup>
-                                <SelectLabel>All</SelectLabel>
-                                {COUNTRIES.map((country) => (
-                                  <SelectItem
-                                    key={country.value}
-                                    value={country.value}
-                                  >
-                                    {country.title}
-                                  </SelectItem>
-                                ))}
-                              </SelectGroup>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="country"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Country</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger className="w-[280px]">
+                              <SelectValue placeholder="Select a country" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectGroup>
+                              <SelectLabel>All</SelectLabel>
+                              {COUNTRIES.map((country) => (
+                                <SelectItem
+                                  key={country.value}
+                                  value={country.value}
+                                >
+                                  {country.title}
+                                </SelectItem>
+                              ))}
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
 
                 <div className="sm:col-span-full">
@@ -335,7 +335,7 @@ export function ApplicationForm() {
                 <div className="col-span-3">
                   <FormField
                     control={form.control}
-                    name="firstname"
+                    name="level"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Level</FormLabel>
