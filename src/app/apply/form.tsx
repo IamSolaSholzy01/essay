@@ -50,6 +50,26 @@ const formSchema = z.object({
   bio: z.string().min(2, {
     message: "Bio must be at least 2 characters.",
   }),
+  school: z.string().min(2, {
+    message: "School must be at least 2 characters.",
+  }),
+  state: z.string().min(2, {
+    message: "State must be at least 2 characters.",
+  }),
+  city: z.string().min(2, {
+    message: "City must be at least 2 characters.",
+  }),
+  department: z.string().min(2, {
+    message: "Department must be at least 2 characters.",
+  }),
+  level: z.number().min(100).max(800),
+  title: z.string().min(2, {
+    message: "Title must be at least 2 characters.",
+  }),
+  summary: z.string().min(2, {
+    message: "Summary must be at least 2 characters.",
+  }),
+  comments: z.string(),
 });
 
 export function ApplicationForm() {
@@ -247,124 +267,112 @@ export function ApplicationForm() {
             </p>
           </div>
 
-          <form className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+          <div className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
             <div className="px-4 py-6 sm:p-8">
               <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div className="sm:col-span-4">
-                  <label
-                    htmlFor="school"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Name
-                  </label>
-                  <div className="mt-2">
-                    <div className="flex rounded-md shadow-sm sm:max-w-md">
-                      <input
-                        type="text"
-                        name="school"
-                        id="school"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        placeholder="University of Kansas"
-                      />
-                    </div>
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="school"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Institution</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="University of Kansas"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
 
                 <div className="col-span-3">
-                  <label
-                    htmlFor="state"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    State
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="state"
-                      name="state"
-                      type="text"
-                      autoComplete="state"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="state"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>State</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Illinois" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
 
                 <div className="col-span-3">
-                  <label
-                    htmlFor="city"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    City
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="city"
-                      name="city"
-                      type="text"
-                      autoComplete="city"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="city"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>City</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Chicago" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
 
                 <div className="col-span-3">
-                  <label
-                    htmlFor="department"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Department
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="department"
-                      name="department"
-                      type="text"
-                      autoComplete="department"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="department"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Department</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Civil Engineering" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
 
                 <div className="col-span-3">
-                  <label
-                    htmlFor="level"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Level
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="level"
-                      name="level"
-                      type="text"
-                      autoComplete="level"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                </div>
-
-                <div className="col-span-full">
-                  <label
-                    htmlFor="photo"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Photo
-                  </label>
-                  <div className="mt-2 flex items-center gap-x-3">
-                    <PersonIcon
-                      className="h-6 w-6 text-gray-300"
-                      aria-hidden="true"
-                    />
-                    <button
-                      type="button"
-                      className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
-                      Change
-                    </button>
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="firstname"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Level</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Select a level" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectGroup>
+                              <SelectItem value={"100"}>{100}</SelectItem>
+                              <SelectItem value={"200"}>{200}</SelectItem>
+                              <SelectItem value={"300"}>{300}</SelectItem>
+                              <SelectItem value={"400"}>{400}</SelectItem>
+                              <SelectItem value={"500"}>{500}</SelectItem>
+                              <SelectItem value={"600"}>{600}</SelectItem>
+                              <SelectItem value={"700"}>{700}</SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
@@ -378,71 +386,63 @@ export function ApplicationForm() {
             </p>
           </div>
 
-          <form className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+          <div className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
             <div className="px-4 py-6 sm:p-8">
               <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div className="col-span-full">
-                  <label
-                    htmlFor="title"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Title
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      type="text"
-                      name="title"
-                      id="title"
-                      autoComplete="title"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="title"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Title</FormLabel>
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
 
                 <div className="sm:col-span-6 sm:col-start-1">
-                  <label
-                    htmlFor="bio"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Summary
-                  </label>
-                  <div className="mt-2">
-                    <textarea
-                      id="summary"
-                      name="summary"
-                      rows={3}
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      defaultValue={""}
-                    />
-                  </div>
-                  <p className="mt-3 text-sm leading-6 text-gray-600">
-                    Write a few sentences about yourself.
-                  </p>
+                  <FormField
+                    control={form.control}
+                    name="summary"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Summary</FormLabel>
+                        <FormControl>
+                          <Textarea {...field} />
+                        </FormControl>
+                        <FormDescription>
+                          Tell us about your chosen topic. How does it relate to
+                          the theme?
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
 
                 <div className="sm:col-span-6 sm:col-start-1">
-                  <label
-                    htmlFor="comments"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Additional Comments
-                  </label>
-                  <div className="mt-2">
-                    <textarea
-                      id="comments"
-                      name="comments"
-                      rows={3}
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      defaultValue={""}
-                    />
-                  </div>
-                  <p className="mt-3 text-sm leading-6 text-gray-600">
-                    Write a few sentences about yourself.
-                  </p>
+                  <FormField
+                    control={form.control}
+                    name="comments"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Comments</FormLabel>
+                        <FormControl>
+                          <Textarea {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
         <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
           <button
