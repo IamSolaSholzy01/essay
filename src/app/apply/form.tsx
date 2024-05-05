@@ -93,10 +93,14 @@ export function ApplicationForm() {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
+    await fetch("/api/apply", {
+      method: "POST",
+      body: JSON.stringify(values),
+    });
   }
   return (
     <Form {...form}>
@@ -121,7 +125,7 @@ export function ApplicationForm() {
                       <FormItem>
                         <FormLabel>First name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Tom" {...field} />
+                          <Input placeholder="eg. Tom" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -136,7 +140,7 @@ export function ApplicationForm() {
                       <FormItem>
                         <FormLabel>Last name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Brady" {...field} />
+                          <Input placeholder="eg. Bradley" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -151,7 +155,7 @@ export function ApplicationForm() {
                       <FormItem>
                         <FormLabel>Email</FormLabel>
                         <FormControl>
-                          <Input placeholder="tom@example.com" {...field} />
+                          <Input placeholder="eg. tom@example.com" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -166,7 +170,7 @@ export function ApplicationForm() {
                       <FormItem>
                         <FormLabel>Phone</FormLabel>
                         <FormControl>
-                          <Input placeholder="0909090090" {...field} />
+                          <Input placeholder="eg 0909090090" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -274,7 +278,7 @@ export function ApplicationForm() {
                         <FormLabel>Institution</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="University of Kansas"
+                            placeholder="eg. University of Lagos"
                             {...field}
                           />
                         </FormControl>
@@ -292,7 +296,7 @@ export function ApplicationForm() {
                       <FormItem>
                         <FormLabel>State</FormLabel>
                         <FormControl>
-                          <Input placeholder="Illinois" {...field} />
+                          <Input placeholder="eg. Lagos" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -308,7 +312,7 @@ export function ApplicationForm() {
                       <FormItem>
                         <FormLabel>City</FormLabel>
                         <FormControl>
-                          <Input placeholder="Chicago" {...field} />
+                          <Input placeholder="eg. Akoka" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -324,7 +328,10 @@ export function ApplicationForm() {
                       <FormItem>
                         <FormLabel>Department</FormLabel>
                         <FormControl>
-                          <Input placeholder="Civil Engineering" {...field} />
+                          <Input
+                            placeholder="eg. Civil Engineering"
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
