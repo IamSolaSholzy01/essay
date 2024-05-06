@@ -99,7 +99,7 @@ export function ApplicationForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    await fetch("/api/apply", {
+    await fetch("https://essay-ten.vercel.app/api/apply", {
       method: "POST",
       body: JSON.stringify(values),
     })
