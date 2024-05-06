@@ -24,6 +24,7 @@ import {
 import { COUNTRIES } from "@/lib/countries";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   firstname: z.string().min(2, {
@@ -92,15 +93,24 @@ export function ApplicationForm() {
     },
   });
 
+  const { toast } = useToast();
+
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
     await fetch("/api/apply", {
       method: "POST",
       body: JSON.stringify(values),
-    });
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast({
+          variant: data.success ? "success" : "destructive",
+          title: data.success ? "Success" : "Uh oh! Something went wrong.",
+          description: data.message,
+        });
+      });
   }
   return (
     <Form {...form}>

@@ -21,13 +21,13 @@ interface Application {
 export async function POST(request: NextRequest) {
   const body: Application = await request.json();
   if (!body) {
-    return Response.json({ message: "No body provided" });
+    return Response.json({ message: "No body provided", success: false });
   }
   if (!body.email) {
-    return Response.json({ message: "No email provided" });
+    return Response.json({ message: "No email provided", success: false });
   }
   if (!isEmail(body.email)) {
-    return Response.json({ message: "Invalid email provided" });
+    return Response.json({ message: "Invalid email provided", success: false });
   }
 
   try {
@@ -40,10 +40,15 @@ export async function POST(request: NextRequest) {
       .then((r) => {
         return {
           message: "Your application has been received. Thank you!",
+          success: true,
         };
       });
     return Response.json(message);
   } catch (error) {
-    return Response.json({ message: "An error occurred", error });
+    return Response.json({
+      message: "An error occurred",
+      error,
+      success: false,
+    });
   }
 }

@@ -6,7 +6,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = env("DATABASE_URL")
+  url      = "mongodb+srv://web_app_exposed:Kinc5eXbxwaaidcP@nicesaessaycompetition.t6jflh3.mongodb.net/competition?retryWrites=true&w=majority&appName=NicesaEssayCompetition"
 }
 
 model Application {

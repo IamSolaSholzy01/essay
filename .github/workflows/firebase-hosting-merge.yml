@@ -13,10 +13,6 @@ jobs:
       - uses: actions/checkout@v4
       - run: npm install -g pnpm
       - run: pnpm install --frozen-lockfile && pnpm run build
-      - run: |
-          touch .env
-          echo DATABASE_URL=${{ secrets.DATABASE_URL }} >> .env
-          cat .env
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
