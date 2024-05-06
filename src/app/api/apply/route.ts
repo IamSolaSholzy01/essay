@@ -1,5 +1,6 @@
 import prisma from "@/lib/db";
 import { NextRequest } from "next/server";
+import { isEmail } from "class-validator";
 interface Application {
   firstname: string;
   lastname: string;
@@ -25,9 +26,12 @@ export async function POST(request: NextRequest) {
   if (!body.email) {
     return Response.json({ message: "No email provided" });
   }
+  if (!isEmail(body.email)) {
+    return Response.json({ message: "Invalid email provided" });
+  }
 
   try {
-    await prisma.application
+    const message = await prisma.application
       .create({
         data: {
           ...body,
@@ -36,10 +40,10 @@ export async function POST(request: NextRequest) {
       .then((r) => {
         return {
           message: "Your application has been received. Thank you!",
-          body: r,
         };
       });
-  } catch (error) {}
-
-  return Response.json({ message: "Received response", body });
+    return Response.json(message);
+  } catch (error) {
+    return Response.json({ message: "An error occurred", error });
+  }
 }
