@@ -170,7 +170,7 @@ export function ApplicationForm() {
                       <FormItem>
                         <FormLabel>Phone</FormLabel>
                         <FormControl>
-                          <Input placeholder="eg 0909090090" {...field} />
+                          <Input placeholder="eg. 0909090090" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
